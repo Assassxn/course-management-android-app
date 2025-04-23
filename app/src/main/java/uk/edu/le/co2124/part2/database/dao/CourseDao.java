@@ -14,12 +14,11 @@ import uk.edu.le.co2124.part2.database.relations.CourseWithStudents;
 
 @Dao
 public interface CourseDao {
-
     @Insert
-    void insert(Course course);
+    long insert(Course course); // Must be long for Room insert
 
     @Delete
-    void delete(Course course);
+    int delete(Course course); // int is valid for delete (number of rows affected)
 
     @Query("SELECT * FROM Course ORDER BY courseName ASC")
     LiveData<List<Course>> getAllCourses();
@@ -27,4 +26,7 @@ public interface CourseDao {
     @Transaction
     @Query("SELECT * FROM Course WHERE courseId = :courseId")
     LiveData<CourseWithStudents> getCourseWithStudentsLive(int courseId);
+
+    @Query("SELECT * FROM Course WHERE courseId = :courseId")
+    LiveData<Course> getCourseById(int courseId);
 }

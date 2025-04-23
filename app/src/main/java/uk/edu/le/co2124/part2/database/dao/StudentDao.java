@@ -14,12 +14,11 @@ import uk.edu.le.co2124.part2.database.relations.StudentWithCourses;
 
 @Dao
 public interface StudentDao {
-
     @Insert
-    void insert(Student student);
+    long insert(Student student); // Updated to long for Room insert
 
     @Delete
-    void delete(Student student);
+    int delete(Student student);
 
     @Query("SELECT * FROM Student ORDER BY name ASC")
     LiveData<List<Student>> getAllStudents();

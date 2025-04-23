@@ -16,9 +16,14 @@ import uk.edu.le.co2124.part2.database.entity.Course;
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
 
     private List<Course> courseList;
+    private OnCourseClickListener listener;
 
-    public CourseAdapter(List<Course> courseList) {
-        this.courseList = courseList;
+    public interface OnCourseClickListener {
+        void onCourseClick(Course course);
+    }
+
+    public CourseAdapter(OnCourseClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -34,6 +39,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         holder.courseCodeTextView.setText("Course Code: " + course.courseCode);
         holder.courseNameTextView.setText("Course Name: " + course.courseName);
         holder.lecturerNameTextView.setText("Lecturer: " + course.lecturerName);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onCourseClick(course);
+            }
+        });
     }
 
     @Override

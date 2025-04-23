@@ -2,7 +2,6 @@ package uk.edu.le.co2124.part2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -15,8 +14,7 @@ import java.util.List;
 import uk.edu.le.co2124.part2.adapter.CourseAdapter;
 import uk.edu.le.co2124.part2.database.entity.Course;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements CourseAdapter.OnCourseClickListener {
     private RecyclerView recyclerViewCourses;
     private CourseAdapter courseAdapter;
     private CourseViewModel courseViewModel;
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize RecyclerView and Adapter
         recyclerViewCourses = findViewById(R.id.recyclerViewCourses);
         recyclerViewCourses.setLayoutManager(new LinearLayoutManager(this));
-        courseAdapter = new CourseAdapter(null);
+        courseAdapter = new CourseAdapter(this);
         recyclerViewCourses.setAdapter(courseAdapter);
 
         // Get ViewModel
@@ -39,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         courseViewModel.getAllCourses().observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
-                Log.d("MainActivity", "onChanged: " + courses.size());
-                // Update the adapter with new courses
                 courseAdapter.updateCourseList(courses);
             }
         });
@@ -57,5 +53,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         courseViewModel.getAllCourses().observe(this, courses -> courseAdapter.updateCourseList(courses));
+    }
+
+    @Override
+    public void onCourseClick(Course course) {
+        // Navigate to CourseDetailsActivity with the clicked course
+        Intent intent = new Intent(this, CourseDetailsActivity.class);
+        intent.putExtra("courseId", course.courseId);  // Pass course ID or any other necessary details
+        startActivity(intent);
     }
 }

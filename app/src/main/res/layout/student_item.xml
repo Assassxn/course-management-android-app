@@ -24,33 +24,34 @@
             android:paddingBottom="12dp">
 
             <TextView
-                android:id="@+id/courseCode"
+                android:id="@+id/textStudentName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="18sp"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:id="@+id/courseName"
+                android:id="@+id/textStudentEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginTop="4dp"
-                app:layout_constraintTop_toBottomOf="@id/courseCode"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintTop_toBottomOf="@id/textStudentName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:id="@+id/lecturerName"
+                android:id="@+id/textStudentMatric"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="4dp"
-                app:layout_constraintTop_toBottomOf="@id/courseName"
+                app:layout_constraintTop_toBottomOf="@id/textStudentEmail"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
