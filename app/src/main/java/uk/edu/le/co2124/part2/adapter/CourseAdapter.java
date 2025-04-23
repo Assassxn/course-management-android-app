@@ -59,10 +59,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         holder.courseName.setText(course.courseName);
         holder.lecturerName.setText(course.lecturerName);
 
-        if (position == selectedPosition) {
+        boolean shouldShowDelete = (position == selectedPosition);
+
+        if (shouldShowDelete) {
             holder.buttonDelete.setVisibility(View.VISIBLE);
             holder.buttonDelete.setAlpha(0f);
-            holder.buttonDelete.setTranslationY(50);
+            holder.buttonDelete.setTranslationY(30f);
             holder.buttonDelete.animate()
                     .alpha(1f)
                     .translationY(0f)
@@ -71,7 +73,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         } else {
             holder.buttonDelete.animate()
                     .alpha(0f)
-                    .translationY(50f)
+                    .translationY(30f)
                     .setDuration(250)
                     .withEndAction(() -> holder.buttonDelete.setVisibility(View.GONE))
                     .start();
@@ -79,22 +81,30 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
         holder.itemView.setOnClickListener(v -> {
             if (selectedPosition != -1 && selectedPosition != position) {
-                int oldPos = selectedPosition;
+                int prevPos = selectedPosition;
                 selectedPosition = -1;
-                notifyItemChanged(oldPos);
+                notifyItemChanged(prevPos); // Hide previous delete
+            } else if (selectedPosition == position) {
+                selectedPosition = -1;
+                notifyItemChanged(position);
             } else {
-                listener.onCourseClick(course);
+                listener.onCourseClick(course); // Normal click
             }
         });
 
         holder.itemView.setOnLongClickListener(v -> {
+            int previous = selectedPosition;
             selectedPosition = (selectedPosition == position) ? -1 : position;
-            notifyDataSetChanged();
+
+            if (previous != -1) notifyItemChanged(previous);
+            notifyItemChanged(position);
             return true;
         });
 
         holder.buttonDelete.setOnClickListener(v -> {
+            int previous = selectedPosition;
             selectedPosition = -1;
+            notifyItemChanged(previous);
             listener.onCourseDelete(course);
         });
     }

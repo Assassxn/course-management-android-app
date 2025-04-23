@@ -37,8 +37,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
             // 1. Observe course LiveData on the main thread
             db.courseDao().getCourseById(courseId).observe(this, course -> {
                 if (course != null) {
-                    textCourseCode.setText("Course Code: " + course.courseCode);
                     textCourseName.setText(course.courseName);
+                    textCourseCode.setText("Course Code: " + course.courseCode);
                     textLecturerName.setText("Lecturer: " + course.lecturerName);
                 }
             });
