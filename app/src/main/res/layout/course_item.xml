@@ -4,24 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="16dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp">
+    android:padding="12dp"
+    android:background="#F9F9F9">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:cardElevation="4dp"
-        app:cardCornerRadius="12dp">
+        app:cardCornerRadius="12dp"
+        app:strokeColor="#DDDDDD"
+        app:strokeWidth="1dp"
+        android:backgroundTint="@android:color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp">
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/courseCode"
@@ -29,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="18sp"
+                android:textColor="#000"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -38,6 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:textColor="#444"
                 android:layout_marginTop="4dp"
                 app:layout_constraintTop_toBottomOf="@id/courseCode"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,14 +49,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="#777"
                 android:layout_marginTop="4dp"
                 app:layout_constraintTop_toBottomOf="@id/courseName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <!-- Hidden delete button shown on long press -->
     <Button
         android:id="@+id/buttonDelete"
         android:layout_width="wrap_content"
@@ -63,8 +65,8 @@
         android:text="Delete"
         android:visibility="gone"
         android:layout_gravity="start"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:backgroundTint="@android:color/holo_red_light"
-        android:textColor="@android:color/white"/>
-
+        android:textColor="@android:color/white"
+        android:elevation="2dp"/>
 </LinearLayout>

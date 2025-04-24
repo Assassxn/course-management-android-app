@@ -46,51 +46,51 @@ public abstract class CourseManagementDB extends RoomDatabase {
             super.onCreate(db);
 
             databaseWriteExecutor.execute(() -> {
-                CourseDao courseDao = INSTANCE.courseDao();
-                StudentDao studentDao = INSTANCE.studentDao();
-                CourseStudentDao courseStudentDao = INSTANCE.courseStudentDao();
-
-                // Insert courses
-                Course course1 = new Course();
-                course1.courseCode = "CS101";
-                course1.courseName = "Introduction to Computer Science";
-                course1.lecturerName = "John Smith";
-                long course1Id = courseDao.insert(course1);
-
-                Course course2 = new Course();
-                course2.courseCode = "CS202";
-                course2.courseName = "Data Structures and Algorithms";
-                course2.lecturerName = "Jane Doe";
-                long course2Id = courseDao.insert(course2);
-
-                // Insert students
-                Student student1 = new Student();
-                student1.name = "Alice Johnson";
-                student1.email = "alice.johnson@example.com";
-                student1.userName = "alicej";
-                long student1Id = studentDao.insert(student1);
-
-                Student student2 = new Student();
-                student2.name = "Bob Smith";
-                student2.email = "bob.smith@example.com";
-                student2.userName = "bobs";
-                long student2Id = studentDao.insert(student2);
-
-                // Enroll students in courses
-                CourseStudentCrossRef crossRef1 = new CourseStudentCrossRef();
-                crossRef1.courseId = (int) course1Id;
-                crossRef1.studentId = (int) student1Id;
-                courseStudentDao.enrollStudent(crossRef1);
-
-                CourseStudentCrossRef crossRef2 = new CourseStudentCrossRef();
-                crossRef2.courseId = (int) course1Id;
-                crossRef2.studentId = (int) student2Id;
-                courseStudentDao.enrollStudent(crossRef2);
-
-                CourseStudentCrossRef crossRef3 = new CourseStudentCrossRef();
-                crossRef3.courseId = (int) course2Id;
-                crossRef3.studentId = (int) student1Id;
-                courseStudentDao.enrollStudent(crossRef3);
+//                CourseDao courseDao = INSTANCE.courseDao();
+//                StudentDao studentDao = INSTANCE.studentDao();
+//                CourseStudentDao courseStudentDao = INSTANCE.courseStudentDao();
+//
+//                // Insert courses
+//                Course course1 = new Course();
+//                course1.courseCode = "CS101";
+//                course1.courseName = "Introduction to Computer Science";
+//                course1.lecturerName = "John Smith";
+//                long course1Id = courseDao.insert(course1);
+//
+//                Course course2 = new Course();
+//                course2.courseCode = "CS202";
+//                course2.courseName = "Data Structures and Algorithms";
+//                course2.lecturerName = "Jane Doe";
+//                long course2Id = courseDao.insert(course2);
+//
+//                // Insert students
+//                Student student1 = new Student();
+//                student1.name = "Alice Johnson";
+//                student1.email = "alice.johnson@example.com";
+//                student1.userName = "alicej";
+//                long student1Id = studentDao.insert(student1);
+//
+//                Student student2 = new Student();
+//                student2.name = "Bob Smith";
+//                student2.email = "bob.smith@example.com";
+//                student2.userName = "bobs";
+//                long student2Id = studentDao.insert(student2);
+//
+//                // Enroll students in courses
+//                CourseStudentCrossRef crossRef1 = new CourseStudentCrossRef();
+//                crossRef1.courseId = (int) course1Id;
+//                crossRef1.studentId = (int) student1Id;
+//                courseStudentDao.enrollStudent(crossRef1);
+//
+//                CourseStudentCrossRef crossRef2 = new CourseStudentCrossRef();
+//                crossRef2.courseId = (int) course1Id;
+//                crossRef2.studentId = (int) student2Id;
+//                courseStudentDao.enrollStudent(crossRef2);
+//
+//                CourseStudentCrossRef crossRef3 = new CourseStudentCrossRef();
+//                crossRef3.courseId = (int) course2Id;
+//                crossRef3.studentId = (int) student1Id;
+//                courseStudentDao.enrollStudent(crossRef3);
             });
         }
     };

@@ -3,16 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="16dp"
+    android:background="#FFFFFF">
 
+    <!-- Course Name -->
     <TextView
         android:id="@+id/textCourseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Course Name"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp" />
 
+    <!-- Course Code -->
     <TextView
         android:id="@+id/textCourseCode"
         android:layout_width="wrap_content"
@@ -20,4 +25,5 @@
         android:text="Course Code"
         android:textSize="16sp"
         android:textColor="#666666" />
+
 </LinearLayout>
