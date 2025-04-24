@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/textTitle"
-            android:text="Create Course"
+            android:text="@string/create_course"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#333"
@@ -32,7 +32,7 @@
 
             <EditText
                 android:id="@+id/editCourseCode"
-                android:hint="Course Code"
+                android:hint="@string/course_code"
                 android:background="@drawable/bg_edittext"
                 android:padding="12dp"
                 android:layout_marginBottom="12dp"
@@ -41,7 +41,7 @@
 
             <EditText
                 android:id="@+id/editCourseName"
-                android:hint="Course Name"
+                android:hint="@string/course_name"
                 android:background="@drawable/bg_edittext"
                 android:padding="12dp"
                 android:layout_marginBottom="12dp"
@@ -50,7 +50,7 @@
 
             <EditText
                 android:id="@+id/editLecturer"
-                android:hint="Lecturer Name"
+                android:hint="@string/lecturer_name"
                 android:background="@drawable/bg_edittext"
                 android:padding="12dp"
                 android:layout_width="match_parent"
@@ -59,7 +59,7 @@
 
         <Button
             android:id="@+id/btnCreateCourse"
-            android:text="Create Course"
+            android:text="@string/create_course"
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
