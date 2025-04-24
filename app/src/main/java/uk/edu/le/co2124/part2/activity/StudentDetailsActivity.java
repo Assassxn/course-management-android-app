@@ -63,20 +63,20 @@ public class StudentDetailsActivity extends AppCompatActivity {
                     .getCoursesForStudent(studentId);
 
             runOnUiThread(() -> {
-                // Pass a dummy listener if you do not need click functionality
+                // Adapter with readOnly=true to disable long press & delete button
                 courseAdapter = new CourseAdapter(new CourseAdapter.OnCourseClickListener() {
                     @Override
                     public void onCourseClick(Course course) {
-                        // No action needed for now
+                        // You can add course detail view here if needed
                     }
 
                     @Override
                     public void onCourseDelete(Course course) {
-                        // No action needed for now
+                        // Delete should never be triggered in read-only mode
                     }
-                });
+                }, true); // true = readOnly
 
-                courseAdapter.updateCourseList(courses);  // Update the list with the fetched courses
+                courseAdapter.updateCourseList(courses);
                 recyclerViewCourses.setLayoutManager(new LinearLayoutManager(this));
                 recyclerViewCourses.setAdapter(courseAdapter);
             });

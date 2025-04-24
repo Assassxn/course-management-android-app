@@ -19,6 +19,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     private List<Course> courseList = new ArrayList<>();
     private final OnCourseClickListener listener;
+    private final boolean readOnly;
     private int selectedPosition = -1;
 
     public interface OnCourseClickListener {
@@ -26,8 +27,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         void onCourseDelete(Course course);
     }
 
-    public CourseAdapter(OnCourseClickListener listener) {
+    public CourseAdapter(OnCourseClickListener listener, boolean readOnly) {
         this.listener = listener;
+        this.readOnly = readOnly;
     }
 
     public void updateCourseList(List<Course> courses) {
@@ -37,6 +39,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     public int getSelectedPosition() {
         return selectedPosition;
+    }
+
+    public Course getCourseAtPosition(int position) {
+        return courseList.get(position);
     }
 
     public void clearSelection() {
@@ -59,40 +65,50 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         holder.courseName.setText(course.courseName);
         holder.lecturerName.setText(course.lecturerName);
 
-        boolean shouldShowDelete = (position == selectedPosition);
-
-        if (shouldShowDelete) {
-            holder.buttonDelete.setVisibility(View.VISIBLE);
-            holder.buttonDelete.setAlpha(0f);
-            holder.buttonDelete.setTranslationY(30f);
-            holder.buttonDelete.animate()
-                    .alpha(1f)
-                    .translationY(0f)
-                    .setDuration(250)
-                    .start();
+        if (readOnly) {
+            holder.buttonDelete.setVisibility(View.GONE);
         } else {
-            holder.buttonDelete.animate()
-                    .alpha(0f)
-                    .translationY(30f)
-                    .setDuration(250)
-                    .withEndAction(() -> holder.buttonDelete.setVisibility(View.GONE))
-                    .start();
+            boolean shouldShowDelete = (position == selectedPosition);
+
+            if (shouldShowDelete) {
+                holder.buttonDelete.setVisibility(View.VISIBLE);
+                holder.buttonDelete.setAlpha(0f);
+                holder.buttonDelete.setTranslationY(30f);
+                holder.buttonDelete.animate()
+                        .alpha(1f)
+                        .translationY(0f)
+                        .setDuration(250)
+                        .start();
+            } else {
+                holder.buttonDelete.animate()
+                        .alpha(0f)
+                        .translationY(30f)
+                        .setDuration(250)
+                        .withEndAction(() -> holder.buttonDelete.setVisibility(View.GONE))
+                        .start();
+            }
         }
 
         holder.itemView.setOnClickListener(v -> {
-            if (selectedPosition != -1 && selectedPosition != position) {
-                int prevPos = selectedPosition;
-                selectedPosition = -1;
-                notifyItemChanged(prevPos); // Hide previous delete
-            } else if (selectedPosition == position) {
-                selectedPosition = -1;
-                notifyItemChanged(position);
+            if (!readOnly) {
+                if (selectedPosition != -1 && selectedPosition != position) {
+                    int prevPos = selectedPosition;
+                    selectedPosition = -1;
+                    notifyItemChanged(prevPos); // Hide previous delete
+                } else if (selectedPosition == position) {
+                    selectedPosition = -1;
+                    notifyItemChanged(position);
+                } else {
+                    listener.onCourseClick(course); // Normal click
+                }
             } else {
-                listener.onCourseClick(course); // Normal click to view course details
+                listener.onCourseClick(course);
             }
         });
 
         holder.itemView.setOnLongClickListener(v -> {
+            if (readOnly) return false;
+
             int previous = selectedPosition;
             selectedPosition = (selectedPosition == position) ? -1 : position;
 
@@ -105,7 +121,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             int previous = selectedPosition;
             selectedPosition = -1;
             notifyItemChanged(previous);
-            listener.onCourseDelete(course); // Handle course deletion
+            listener.onCourseDelete(course);
         });
     }
 

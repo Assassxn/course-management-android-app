@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
 
         recyclerViewCourses = findViewById(R.id.recyclerViewCourses);
         recyclerViewCourses.setLayoutManager(new LinearLayoutManager(this));
-        courseAdapter = new CourseAdapter(this);
+        courseAdapter = new CourseAdapter(this, false);
         recyclerViewCourses.setAdapter(courseAdapter);
         recyclerViewCourses.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {

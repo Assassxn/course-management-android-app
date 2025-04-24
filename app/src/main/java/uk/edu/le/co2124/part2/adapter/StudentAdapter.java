@@ -17,6 +17,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
     private List<Student> studentList;
     private final OnStudentClickListener listener;
+    private int selectedPosition = -1;  // To track the long-pressed item
 
     // Interface to handle click events
     public interface OnStudentClickListener {
@@ -46,6 +47,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
         // Handle click
         holder.itemView.setOnClickListener(v -> listener.onStudentClick(student));
+
+        // Handle long press (set selected position)
+        holder.itemView.setOnLongClickListener(v -> {
+            selectedPosition = position;
+            return false;  // Allow normal click behavior after long press
+        });
     }
 
     @Override
@@ -53,9 +60,20 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         return studentList == null ? 0 : studentList.size();
     }
 
+    // Update the student list and notify changes
     public void updateStudentList(List<Student> newStudentList) {
         this.studentList = newStudentList;
         notifyDataSetChanged();
+    }
+
+    // Method to get the selected student based on long press
+    public Student getStudentAtPosition(int position) {
+        return studentList != null && position >= 0 && position < studentList.size() ? studentList.get(position) : null;
+    }
+
+    // Method to get the selected position
+    public int getSelectedPosition() {
+        return selectedPosition;
     }
 
     public static class StudentViewHolder extends RecyclerView.ViewHolder {

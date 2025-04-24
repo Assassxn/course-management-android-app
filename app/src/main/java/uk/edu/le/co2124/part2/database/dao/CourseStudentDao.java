@@ -26,4 +26,7 @@ public interface CourseStudentDao {
 
     @Query("SELECT EXISTS(SELECT 1 FROM CourseStudentCrossRef WHERE courseId = :courseId AND studentId = :studentId)")
     Boolean isStudentEnrolledInCourse(int courseId, int studentId);
+
+    @Query("DELETE FROM CourseStudentCrossRef WHERE studentId = :studentId AND courseId = :courseId")
+    void removeStudentFromCourse(int studentId, int courseId);
 }
