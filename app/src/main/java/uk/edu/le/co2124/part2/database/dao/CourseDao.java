@@ -29,4 +29,7 @@ public interface CourseDao {
 
     @Query("SELECT * FROM Course WHERE courseId = :courseId")
     LiveData<Course> getCourseById(int courseId);
+
+    @Query("SELECT * FROM Course WHERE courseId IN (SELECT courseId FROM coursestudentcrossref WHERE studentId = :studentId)")
+    List<Course> getCoursesForStudent(int studentId); // New method for getting courses for a student)
 }

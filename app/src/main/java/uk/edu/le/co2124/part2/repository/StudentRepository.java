@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -32,5 +33,9 @@ public class StudentRepository {
 
     public LiveData<StudentWithCourses> getStudentWithCourses(int studentId) {
         return studentDao.getStudentWithCoursesLive(studentId);
+    }
+
+    public LiveData<List<Student>> getAllStudents() {
+        return studentDao.getAllStudents();
     }
 }

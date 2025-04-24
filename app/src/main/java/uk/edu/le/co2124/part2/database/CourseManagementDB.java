@@ -46,8 +46,6 @@ public abstract class CourseManagementDB extends RoomDatabase {
             super.onCreate(db);
 
             databaseWriteExecutor.execute(() -> {
-                Log.d("CourseManagementDB", "Populating database...");
-
                 CourseDao courseDao = INSTANCE.courseDao();
                 StudentDao studentDao = INSTANCE.studentDao();
                 CourseStudentDao courseStudentDao = INSTANCE.courseStudentDao();

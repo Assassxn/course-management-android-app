@@ -19,4 +19,3 @@ public class Student {
     @NonNull
     public String userName;
 }
-

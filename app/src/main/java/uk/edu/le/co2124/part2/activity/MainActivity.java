@@ -1,4 +1,4 @@
-package uk.edu.le.co2124.part2;
+package uk.edu.le.co2124.part2.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import uk.edu.le.co2124.part2.viewmodels.CourseViewModel;
+import uk.edu.le.co2124.part2.R;
 import uk.edu.le.co2124.part2.adapter.CourseAdapter;
 import uk.edu.le.co2124.part2.database.entity.Course;
 import uk.edu.le.co2124.part2.repository.CourseStudentRepository;

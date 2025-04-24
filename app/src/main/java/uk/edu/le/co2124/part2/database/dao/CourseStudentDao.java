@@ -23,4 +23,7 @@ public interface CourseStudentDao {
 
     @Query("SELECT * FROM Student WHERE studentId IN (SELECT studentId FROM CourseStudentCrossRef WHERE courseId = :courseId)")
     List<Student> getStudentsForCourse(int courseId);
+
+    @Query("SELECT EXISTS(SELECT 1 FROM CourseStudentCrossRef WHERE courseId = :courseId AND studentId = :studentId)")
+    Boolean isStudentEnrolledInCourse(int courseId, int studentId);
 }

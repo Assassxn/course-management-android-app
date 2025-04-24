@@ -26,4 +26,13 @@ public interface StudentDao {
     @Transaction
     @Query("SELECT * FROM Student WHERE studentId = :studentId")
     LiveData<StudentWithCourses> getStudentWithCoursesLive(int studentId);
+
+    @Query("SELECT * FROM Student WHERE studentId = :studentId LIMIT 1")
+    Student getStudentByStudentId(int studentId);
+
+    @Query("SELECT * FROM Student WHERE userName = :userName LIMIT 1")
+    Student getStudentByUsername(String userName);
+
+    @Query("SELECT * FROM student WHERE studentId IN (SELECT studentId FROM coursestudentcrossref WHERE courseId = :courseId)")
+    List<Student> getStudentsForCourse(int courseId);
 }

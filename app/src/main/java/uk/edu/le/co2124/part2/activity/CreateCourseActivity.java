@@ -1,4 +1,4 @@
-package uk.edu.le.co2124.part2;
+package uk.edu.le.co2124.part2.activity;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import uk.edu.le.co2124.part2.R;
 import uk.edu.le.co2124.part2.database.CourseManagementDB;
 import uk.edu.le.co2124.part2.database.entity.Course;
 

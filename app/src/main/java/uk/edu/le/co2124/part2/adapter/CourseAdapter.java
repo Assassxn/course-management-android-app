@@ -88,7 +88,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                 selectedPosition = -1;
                 notifyItemChanged(position);
             } else {
-                listener.onCourseClick(course); // Normal click
+                listener.onCourseClick(course); // Normal click to view course details
             }
         });
 
@@ -105,7 +105,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             int previous = selectedPosition;
             selectedPosition = -1;
             notifyItemChanged(previous);
-            listener.onCourseDelete(course);
+            listener.onCourseDelete(course); // Handle course deletion
         });
     }
 

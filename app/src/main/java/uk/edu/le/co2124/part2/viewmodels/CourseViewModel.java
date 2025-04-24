@@ -1,4 +1,4 @@
-package uk.edu.le.co2124.part2;
+package uk.edu.le.co2124.part2.viewmodels;
 
 
 import android.app.Application;

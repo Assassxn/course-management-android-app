@@ -16,9 +16,17 @@ import uk.edu.le.co2124.part2.database.entity.Student;
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> {
 
     private List<Student> studentList;
+    private final OnStudentClickListener listener;
 
-    public StudentAdapter(List<Student> studentList) {
+    // Interface to handle click events
+    public interface OnStudentClickListener {
+        void onStudentClick(Student student);
+    }
+
+    // Constructor with student list and listener
+    public StudentAdapter(List<Student> studentList, OnStudentClickListener listener) {
         this.studentList = studentList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -35,11 +43,19 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         holder.textName.setText("Name: " + student.name);
         holder.textEmail.setText("Email: " + student.email);
         holder.textMatric.setText("Matric No: " + student.userName); // Assuming userName is matric
+
+        // Handle click
+        holder.itemView.setOnClickListener(v -> listener.onStudentClick(student));
     }
 
     @Override
     public int getItemCount() {
         return studentList == null ? 0 : studentList.size();
+    }
+
+    public void updateStudentList(List<Student> newStudentList) {
+        this.studentList = newStudentList;
+        notifyDataSetChanged();
     }
 
     public static class StudentViewHolder extends RecyclerView.ViewHolder {
